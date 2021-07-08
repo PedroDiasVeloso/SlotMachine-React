@@ -1,0 +1,58 @@
+@keyframes example {
+    to {
+        transform: rotate(360deg)
+      }
+}   
+
+.slot1 {
+    position: absolute;
+    width: 90px;
+    height: 180px;
+    float: left;
+    padding: 10px;
+    left: 550px;
+    top: 260px;
+    border: 4px solid black;
+}
+
+.slot2 {
+    position: absolute;
+    width: 90px;
+    height: 180px;
+    float: left;
+    padding: 10px;
+    left: 650px;
+    top: 260px;
+    border: 4px solid black;
+}
+
+.slot3 {
+    position: absolute;
+    width: 90px;
+    height: 180px;
+    float: left;
+    padding: 10px;
+    left: 750px;
+    top: 260px;
+    border: 4px solid black;
+}
+
+.stopButton {
+    position: absolute;
+    left: 700px;
+    top: 450px;
+}
+
+.startButton {
+    position: absolute;
+    left: 640px;
+    top: 450px;
+}
+
+.icon {
+    position: absolute;
+    top: 40px;
+    animation-name: example;
+    animation-iteration-count: infinite;
+    transform: translateZ(0);
+}
