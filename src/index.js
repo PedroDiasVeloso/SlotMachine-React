@@ -8,14 +8,14 @@ import reducers from './componentsWithRedux/reducers';
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 
-ReactDOM.render(
+/*ReactDOM.render(
     <App />,
     document.querySelector("#root")
-)
+)*/
 
-/*ReactDOM.render(
+ReactDOM.render(
     <Provider store={createStore(reducers)}>
         <App />
     </Provider>,
     document.querySelector("#root")
-)*/
+)

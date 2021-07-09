@@ -53,7 +53,7 @@ const ReduxSlotMachine = ({ rolling, interval, slots, icons, setRolling, stopRol
                 count++
 
                 //stops the rolling when count reaches 30
-                if (count >= 30) {
+                if (count >= 20) {
                     clearInterval(x)
                     stopAnimation()
                     stopRolling()

@@ -4,20 +4,20 @@ import ReduxSlotMachine from '../componentsWithRedux/ReduxSlotMachine'
 
 
 
-const App = () => {
+/*const App = () => {
 
     return (
         <div><SlotMachine /></div>
     )
-}
+}*/
 
-/*const App = () => {
+const App = () => {
 
     return(
         <div>
             <ReduxSlotMachine />
         </div>
     )
-}*/
+}
 
 export default App
