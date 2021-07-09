@@ -24,7 +24,9 @@ const ReduxSlotMachine = ({ rolling, interval, slots, icons, setRolling, stopRol
             let count = 0
 
             var victoryDiv = document.getElementById("victoryDiv");
+            var lossDiv = document.getElementById("lossDiv");
             victoryDiv.style.display = "none"
+            lossDiv.style.display = "none"
 
             const x = setInterval(() => {
                 const slot1 = [icons.icons[Math.floor(Math.random() * 5)],
@@ -73,6 +75,8 @@ const ReduxSlotMachine = ({ rolling, interval, slots, icons, setRolling, stopRol
 
             return victory()
         }
+
+        return loss()
     }
 
     //shows the winning message
@@ -81,6 +85,15 @@ const ReduxSlotMachine = ({ rolling, interval, slots, icons, setRolling, stopRol
         var victoryDiv = document.getElementById("victoryDiv");
 
         victoryDiv.style.display = "block";
+
+    }
+
+    //shows the loosing message
+    const loss = () => {
+
+        var lossDiv = document.getElementById("lossDiv");
+
+        lossDiv.style.display = "block";
 
     }
 
@@ -131,6 +144,7 @@ const ReduxSlotMachine = ({ rolling, interval, slots, icons, setRolling, stopRol
             <button className="stopButton" onClick={onClickStop}>Stop</button>
             <button className="startButton" onClick={onClickStart}>Start</button>
             <div style={{ display: "none" }} id="victoryDiv"><h3 className="victoryMessage">You Won!</h3></div>
+            <div style={{ display: "none" }} id="lossDiv"><h3 className="victoryMessage">You Lost!</h3></div>
             <i style={{ fontSize: "3rem" }} className="bi bi-arrow-right victoryRowArrow"></i>
 
         </div>
