@@ -14,56 +14,78 @@ const SlotMachine = () => {
     };
 
     //initial slots state
-    const defaultState = [icons.icons[0], icons.icons[1], icons.icons[2]]
+    const defaultState = [
+        [icons.icons[0], icons.icons[1], icons.icons[2]],
+        [icons.icons[0], icons.icons[1], icons.icons[2]],
+        [icons.icons[0], icons.icons[1], icons.icons[2]]
+    ]
 
 
     const [slots, setSlots] = useState(defaultState)
     const [interval, setTheInterval] = useState(null)
-    const [hasStoped, setHasStoped] = useState(false)
-    const [hasRendered, setHasRendered] = useState(false)
+    const [isRolling, setIsRolling] = useState(false)
 
 
     const onClickStop = () => {
         clearInterval(interval)
-        setHasStoped(true)
+        stopAnimation()
+        setIsRolling(false)
         checkVitory()
     }
 
     const onClickStart = () => {
 
-        setHasStoped(false)
-        setHasRendered(true)
-        let count = 0;
+        if (!isRolling) {
+            setIsRolling(true)
+            startAnimation()
+            let count = 0;
 
-        var victoryDiv = document.getElementById("victoryDiv");
-        victoryDiv.style.display = "none"
+            var victoryDiv = document.getElementById("victoryDiv");
+            victoryDiv.style.display = "none"
 
-        const x = (setInterval(() => {
-            const slot1 = icons.icons[Math.floor(Math.random() * 5)]
-            const slot2 = icons.icons[Math.floor(Math.random() * 5)]
-            const slot3 = icons.icons[Math.floor(Math.random() * 5)]
+            const x = (setInterval(() => {
+                const slot1 = [icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)]]
 
-            setSlots([slot1, slot2, slot3])
-            count++
+
+                const slot2 = [icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)]]
 
 
-            if (count >= 100) {
-                clearInterval(x)
-                setHasStoped(true)
-                checkVitory()
-            }
+                const slot3 = [icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)],
+                icons.icons[Math.floor(Math.random() * 5)]]
 
-        }, 150))
+                setSlots([slot1, slot2, slot3])
+                count++
 
-        setTheInterval(x)
 
+
+                if (count >= 30) {
+                    clearInterval(x)
+                    stopAnimation()
+                    setIsRolling(false)
+                    checkVitory()
+                }
+
+            }, 150))
+
+            setTheInterval(x)
+        }
     }
 
     const checkVitory = () => {
-        console.log("on check vitory")
-        const firstSlotValue = document.querySelector("#theFirstSlot").innerHTML
-        const secondSlotValue = document.querySelector("#theSecondSlot").innerHTML
-        const thirdValue = document.querySelector("#theThirdSlot").innerHTML
+        const firstSlotValue = document.querySelector("#middleSlot").innerHTML
+        const secondSlotValue = document.querySelector("#middleSlot2").innerHTML
+        const thirdValue = document.querySelector("#middleSlot3").innerHTML
 
         if (firstSlotValue === secondSlotValue && firstSlotValue === thirdValue) {
 
@@ -79,8 +101,16 @@ const SlotMachine = () => {
 
     }
 
-    const setTop = () => {
-        document.getElementById("victoryDiv").style.top = 3
+    const stopAnimation = () => {
+        document.getElementById("icon").style.animationDuration = 0 + "s"
+        document.getElementById("icon2").style.animationDuration = 0 + "s"
+        document.getElementById("icon3").style.animationDuration = 0 + "s"
+    }
+
+    const startAnimation = () => {
+        document.getElementById("icon").style.animationDuration = 0.5 + "s"
+        document.getElementById("icon2").style.animationDuration = 0.5 + "s"
+        document.getElementById("icon3").style.animationDuration = 0.5 + "s"
     }
 
 
@@ -88,18 +118,30 @@ const SlotMachine = () => {
     return (
         <div>
             <div id="theFirstSlot" className="slot1">
-                <div className="icon">
-                    {slots[0]}
+                <div id="icon" className="icon">
+                    <div>{slots[0][0]}</div>
+                    <div>{slots[0][1]}</div>
+                    <div id="middleSlot">{slots[0][2]}</div>
+                    <div>{slots[0][3]}</div>
+                    <div>{slots[0][4]}</div>
                 </div>
             </div>
             <div id="theSecondSlot" className="slot2">
-                <div className="icon">
-                    {slots[1]}
+                <div id="icon2" className="icon2">
+                    <div >{slots[1][0]}</div>
+                    <div >{slots[1][1]}</div>
+                    <div id="middleSlot2">{slots[1][2]}</div>
+                    <div >{slots[1][3]}</div>
+                    <div >{slots[1][4]}</div>
                 </div>
             </div>
             <div id="theThirdSlot" className="slot3">
-                <div className="icon">
-                    {slots[2]}
+                <div id="icon3" className="icon3">
+                    <div>{slots[2][0]}</div>
+                    <div>{slots[2][1]}</div>
+                    <div id="middleSlot3">{slots[2][2]}</div>
+                    <div>{slots[2][3]}</div>
+                    <div>{slots[2][4]}</div>
                 </div>
             </div>
 
