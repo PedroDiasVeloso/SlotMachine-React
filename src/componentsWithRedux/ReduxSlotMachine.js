@@ -1,51 +1,32 @@
-import React, { useState } from 'react'
-import './SlotMachine.css'
+import React from 'react'
+import '../components/SlotMachine.css'
+import { connect } from 'react-redux'
+import { setRolling, setSlots, setTheInterval, stopRolling } from './actions'
 
 
-const SlotMachine = () => {
-
-    //icons to be used
-    const icons = {
-        icons: [<i id="icon" style={{ fontSize: "4rem", color: "red" }} className="bi bi-globe"></i>,
-        <i id="icon" style={{ fontSize: "4rem", color: "cornflowerblue" }} className="bi bi-truck"></i>,
-        <i id="icon" style={{ fontSize: "4rem", color: "green" }} className="bi bi-tree-fill"></i>,
-        <i id="icon" style={{ fontSize: "4rem", color: "yellow" }} className="bi bi-emoji-smile"></i>,
-        <i id="icon" style={{ fontSize: "4rem", color: "cornflowerblue" }} className="bi bi-flag-fill"></i>]
-    };
-
-    //initial slots state
-    const defaultState = [
-        [icons.icons[0], icons.icons[1], icons.icons[2]],
-        [icons.icons[0], icons.icons[1], icons.icons[2]],
-        [icons.icons[0], icons.icons[1], icons.icons[2]]
-    ]
-
-
-    const [slots, setSlots] = useState(defaultState)
-    const [interval, setTheInterval] = useState(null)
-    const [isRolling, setIsRolling] = useState(false)
-
+const ReduxSlotMachine = ({ rolling, interval, slots, icons, setRolling, stopRolling, setTheInterval, setSlots }) => {
 
     //stops the rolling
     const onClickStop = () => {
         clearInterval(interval)
         stopAnimation()
-        setIsRolling(false)
+        stopRolling()
         checkVitory()
     }
 
     //starts the rolling
     const onClickStart = () => {
 
-        if (!isRolling) {
-            setIsRolling(true)
+        if (!rolling) {
+            setRolling()
             startAnimation()
-            let count = 0;
+
+            let count = 0
 
             var victoryDiv = document.getElementById("victoryDiv");
             victoryDiv.style.display = "none"
 
-            const x = (setInterval(() => {
+            const x = setInterval(() => {
                 const slot1 = [icons.icons[Math.floor(Math.random() * 5)],
                 icons.icons[Math.floor(Math.random() * 5)],
                 icons.icons[Math.floor(Math.random() * 5)],
@@ -69,22 +50,20 @@ const SlotMachine = () => {
                 setSlots([slot1, slot2, slot3])
                 count++
 
-
                 //stops the rolling when count reaches 30
                 if (count >= 30) {
                     clearInterval(x)
                     stopAnimation()
-                    setIsRolling(false)
+                    stopRolling()
                     checkVitory()
                 }
-
-            }, 150))
+            }, 150)
 
             setTheInterval(x)
         }
     }
 
-    //chechs the middle row for 3 equal values
+    //checks middle row for 3 equal values
     const checkVitory = () => {
         const firstSlotValue = document.querySelector("#middleSlot").innerHTML
         const secondSlotValue = document.querySelector("#middleSlot2").innerHTML
@@ -96,7 +75,7 @@ const SlotMachine = () => {
         }
     }
 
-    //show the winning message
+    //shows the winning message
     const victory = () => {
 
         var victoryDiv = document.getElementById("victoryDiv");
@@ -118,8 +97,6 @@ const SlotMachine = () => {
         document.getElementById("icon2").style.animationDuration = 0.5 + "s"
         document.getElementById("icon3").style.animationDuration = 0.5 + "s"
     }
-
-
 
     return (
         <div>
@@ -154,11 +131,24 @@ const SlotMachine = () => {
             <button className="stopButton" onClick={onClickStop}>Stop</button>
             <button className="startButton" onClick={onClickStart}>Start</button>
             <div style={{ display: "none" }} id="victoryDiv"><h3 className="victoryMessage">You Won!</h3></div>
-            <i style={{ fontSize: "3rem"}} className="bi bi-arrow-right victoryRowArrow"></i>
+            <i style={{ fontSize: "3rem" }} className="bi bi-arrow-right victoryRowArrow"></i>
 
         </div>
-
     )
 }
 
-export default SlotMachine
+const mapStateToProps = (state) => {
+    return {
+        rolling: state.rolling,
+        interval: state.interval,
+        slots: state.slots,
+        icons: state.icons
+    }
+}
+
+export default connect(mapStateToProps, {
+    setRolling: setRolling,
+    stopRolling: stopRolling,
+    setTheInterval: setTheInterval,
+    setSlots: setSlots
+})(ReduxSlotMachine)

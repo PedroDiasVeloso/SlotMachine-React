@@ -1,11 +1,29 @@
-@keyframes example {
+@keyframes rollingMove {
     0% {
         transform:translateY(-75%)
     }      
     100%{
         transform: translateY(75%);
     }
-}   
+}
+
+@keyframes winningText {
+    0% {
+        color: red;
+    }
+    25% {
+        color: blue;
+    }
+    50% {
+        color: green;
+    }
+    75%{
+        color: purple;
+    }
+    100%{
+        color: yellow;
+    }
+}
 
 .slot1 {
     position: absolute;
@@ -58,7 +76,7 @@
 .icon {
     position: absolute;
     top: 40px;
-    animation-name: example;
+    animation-name: rollingMove;
     animation-iteration-count: infinite;
     animation-duration: 0s;
     animation-timing-function: ease-in;
@@ -68,7 +86,7 @@
 .icon2 {
     position: absolute;
     top: 40px;
-    animation-name: example;
+    animation-name: rollingMove;
     animation-iteration-count: infinite;
     animation-duration: 0s;
     animation-timing-function: ease-in;
@@ -78,7 +96,7 @@
 .icon3 {
     position: absolute;
     top: 40px;
-    animation-name: example;
+    animation-name: rollingMove;
     animation-iteration-count: infinite;
     animation-duration: 0s;
     animation-timing-function: ease-in;
@@ -89,4 +107,14 @@
     position: absolute;
     left: 500px;
     top: 270px;
+}
+
+.victoryMessage {
+    position: absolute;
+    font-size: 50px;
+    left: 590px;
+    top: 110px;
+    animation-name: winningText;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
 }
