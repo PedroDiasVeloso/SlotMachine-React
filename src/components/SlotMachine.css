@@ -84,3 +84,9 @@
     animation-timing-function: ease-in;
     transform: translatey(-35%);
 }
+
+.victoryRowArrow {
+    position: absolute;
+    left: 500px;
+    top: 270px;
+}

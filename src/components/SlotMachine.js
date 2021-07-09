@@ -148,6 +148,7 @@ const SlotMachine = () => {
             <button className="stopButton" onClick={onClickStop}>Stop</button>
             <button className="startButton" onClick={onClickStart}>Start</button>
             <div style={{ display: "none" }} id="victoryDiv"><h3>You Won!</h3></div>
+            <i style={{ fontSize: "3rem"}} class="bi bi-arrow-right victoryRowArrow"></i>
 
         </div>
 
